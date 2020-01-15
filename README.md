@@ -1,7 +1,7 @@
 # API-manifesto
 Documents how to write APIs
 
-## Response
+## Body
 
 Generally we have a few rules the response has to follow:
 
