@@ -35,7 +35,7 @@ Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes t
 Accept-Language = da
 ```
 
-Use a prioritized list of languages in case control over the fallback language is needed:
+Use a prioritized list of languages to influence the fallback language:
 
 ```bash
 Accept-Language = da, en
@@ -51,7 +51,7 @@ Accept-Language = danish
 
 ### Making debugging easier
 
-Use headers to give the API information about the consumer to ease debugging. There's no industry standard, so feel free to make your own convention. Just remember to use it consistently.
+Use headers to give the API information about the consumer to ease debugging. There's no industry standard, so feel free to make your own convention, just remember to use it consistently.
 
 #### ✅
 
