@@ -3,14 +3,6 @@ Documents how to write APIs
 
 ## Body
 
-Generally we have a few rules the response has to follow:
-
-When we don’t have any data, we need to return in the following way:
-Consistency of key types. e.g. always return IDs as an integer in all endpoints.
-Date/timestamps should always be returned with a time zone.
-Pagination data should be returned in a meta key.
-When an endpoint doesn't have meaningful data to return (e.g. when deleting something), use a status key to communicate the status of the endpoint.
-
 ### Object at the root level
 
 A body should always return an object at the root level. This enables including additional data about the response such as metadata separate from the object(s). We recommend using `data` for succesful requests with meaningful response data and `error` for unsuccesful requests with error data being returned.
