@@ -8,10 +8,10 @@ use the following command: `gh-md-toc README.md | grep -v g-emoji` to filter out
 New section template:
 
 ## Section
-<details>
-<summary>Click to expand</summary>
 
 ### TODO
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -62,10 +62,11 @@ Table of Contents
 # Requests
 
 ## URLs
-<details>
-<summary>Click to expand</summary>
 
 ### TODO
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -74,12 +75,13 @@ Table of Contents
 </details>
 
 ## Request Headers
-<details>
-<summary>Click to expand</summary>
 
 ### Protected endpoints
 
 Use the `Authorization` header to consume protected endpoints. See the [Auth](#auth) section for more information on how to handle authorization and authentication.
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -97,9 +99,14 @@ Avoid using custom headers for authorization:
 UserToken = "QWxhZGRpbjpPcGVuU2VzYW1l"
 ```
 
+</details>
+
 ### Supporting localization
 
 In order to support localization now and in the future, the `Accept-Language` should be used to indicate the client's language towards the API. 
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -123,9 +130,14 @@ Avoid using other standards than ISO 639-1 for specifying the preferred language
 Accept-Language = danish
 ```
 
+</details>
+
 ### Making debugging easier
 
 Use headers to give the API information about the consumer to ease debugging. There's no industry standard, so feel free to make your own convention, just remember to use it consistently.
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -139,12 +151,13 @@ See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do
 # Responses
 
 ## Response Body
-<details>
-<summary>Click to expand</summary>
 
 ### Object at the root level
 
 A body should always return an object at the root level. This enables including additional data about the response such as metadata separate from the object(s). We recommend using `data` for successful requests with meaningful response data and `error` for unsuccessful requests with error data being returned.
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -209,9 +222,14 @@ Avoid returning data that are not encapsulated in a root key (`data` or `error`)
 }
 ```
 
+</details>
+
 ### Return an empty collection when there are no results
 
 To make it easier for the API consumer, return HTTP status code `200` with an empty collection instead of e.g. `204` with no body.
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -227,9 +245,14 @@ Combine HTTP status code `200` with empty collections:
 
 Avoid using HTTP status code `204` for empty collections.
 
+</details>
+
 ## Use `null` or unset keys that are not set
 
 To make the API explicit and to make it easier for the consumer, always return keys without values as `null` or unset them.
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -268,10 +291,11 @@ Avoid including a key without a meaningful value:
 </details>
 
 ## Status Codes
-<details>
-<summary>Click to expand</summary>
 
 ### TODO
+
+<details>
+<summary>Click to see examples</summary>
 
 #### ✅
 
@@ -281,66 +305,66 @@ Avoid including a key without a meaningful value:
 
 # Auth
 
+### TODO
+
 <details>
-<summary>Click to expand</summary>
+<summary>Click to see examples</summary>
 
-## TODO
+#### ✅
 
-### ✅
-
-### ⛔️
+#### ⛔️
 
 </details>
 
 # Error Handling
 
+### TODO
+
 <details>
-<summary>Click to expand</summary>
+<summary>Click to see examples</summary>
 
-## TODO
+#### ✅
 
-### ✅
-
-### ⛔️
+#### ⛔️
 
 </details>
 
 # Localization
 
+### TODO
+
 <details>
-<summary>Click to expand</summary>
+<summary>Click to see examples</summary>
 
-## TODO
+#### ✅
 
-### ✅
-
-### ⛔️
+#### ⛔️
 
 </details>
 
 # Timeouts
 
+### TODO
+
 <details>
-<summary>Click to expand</summary>
+<summary>Click to see examples</summary>
 
-## TODO
+#### ✅
 
-### ✅
-
-### ⛔️
+#### ⛔️
 
 </details>
 
 # Pagination
 
+### TODO
+
 <details>
-<summary>Click to expand</summary>
+<summary>Click to see examples</summary>
 
-## TODO
+#### ✅
 
-### ✅
-
-### ⛔️
+#### ⛔️
 
 </details>
 
