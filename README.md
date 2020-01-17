@@ -1,11 +1,85 @@
-# API-manifesto
+<!--
+Table of contents created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
+use the following command: `gh-md-toc README.md | grep -v g-emoji` to filter out lines with emoji
+-->
+
+<!--
+New section template:
+
+## Section
+<details>
+<summary>Click to expand</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
+-->
+
+# API Manifesto
 Documents how to write APIs
 
-## Headers
+## Introduction
+
+TODO
+
+Table of Contents
+=================
+
+   * [API Manifesto](#api-manifesto)
+      * [Introduction](#introduction)
+   * [Table of Contents](#table-of-contents)
+   * [Requests](#requests)
+      * [URLs](#urls)
+         * [TODO](#todo)
+      * [Request Headers](#request-headers)
+         * [Protected endpoints](#protected-endpoints)
+         * [Supporting localization](#supporting-localization)
+         * [Making debugging easier](#making-debugging-easier)
+   * [Responses](#responses)
+      * [Response Body](#response-body)
+         * [Object at the root level](#object-at-the-root-level)
+         * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
+      * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
+      * [Status Codes](#status-codes)
+         * [TODO](#todo-1)
+   * [Auth](#auth)
+      * [TODO](#todo-2)
+   * [Error Handling](#error-handling)
+      * [TODO](#todo-3)
+   * [Localization](#localization)
+      * [TODO](#todo-4)
+   * [Timeouts](#timeouts)
+      * [TODO](#todo-5)
+   * [Pagination](#pagination)
+      * [TODO](#todo-6)
+   * [Inspiration](#inspiration)
+   
+# Requests
+
+## URLs
+<details>
+<summary>Click to expand</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
+
+## Request Headers
+<details>
+<summary>Click to expand</summary>
 
 ### Protected endpoints
 
-Use the `Authorization` header to consume protected endpoints. See the [Authorization](#authorization) section for more information on how to handle authorization and authentication.
+Use the `Authorization` header to consume protected endpoints. See the [Auth](#auth) section for more information on how to handle authorization and authentication.
 
 #### ✅
 
@@ -60,8 +134,13 @@ Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
 ```
 
 See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do this.
+</details>
 
-## Body
+# Responses
+
+## Response Body
+<details>
+<summary>Click to expand</summary>
 
 ### Object at the root level
 
@@ -148,7 +227,7 @@ Combine HTTP status code `200` with empty collections:
 
 Avoid using HTTP status code `204` for empty collections.
 
-### Use `null` or unset keys that are not set
+## Use `null` or unset keys that are not set
 
 To make the API explicit and to make it easier for the consumer, always return keys without values as `null` or unset them.
 
@@ -186,8 +265,86 @@ Avoid including a key without a meaningful value:
     }
 }
 ```
+</details>
 
-## Inspiration
+## Status Codes
+<details>
+<summary>Click to expand</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
+
+# Auth
+
+<details>
+<summary>Click to expand</summary>
+
+## TODO
+
+### ✅
+
+### ⛔️
+
+</details>
+
+# Error Handling
+
+<details>
+<summary>Click to expand</summary>
+
+## TODO
+
+### ✅
+
+### ⛔️
+
+</details>
+
+# Localization
+
+<details>
+<summary>Click to expand</summary>
+
+## TODO
+
+### ✅
+
+### ⛔️
+
+</details>
+
+# Timeouts
+
+<details>
+<summary>Click to expand</summary>
+
+## TODO
+
+### ✅
+
+### ⛔️
+
+</details>
+
+# Pagination
+
+<details>
+<summary>Click to expand</summary>
+
+## TODO
+
+### ✅
+
+### ⛔️
+
+</details>
+
+# Inspiration
 
 These guidelines have been made with inspiration from the following API guidelines:
 
