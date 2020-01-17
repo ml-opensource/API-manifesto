@@ -1,11 +1,44 @@
+<!--
+Table of contents created by [gh-md-toc](https://github.com/ekalinin/github-markdown-toc)
+
+use the following command: `gh-md-toc README.md | grep -v g-emoji` to filter out lines with emoji
+-->
+
+<!--
+New section template:
+
+## Section
+<details>
+<summary>Click to expand</summary>
+TODO
+</summary>
+-->
+
 # API-manifesto
 Documents how to write APIs
 
+Table of Contents
+=================
+
+   * [API-manifesto](#api-manifesto)
+      * [Headers](#headers)
+         * [Protected endpoints](#protected-endpoints)
+         * [Supporting localization](#supporting-localization)
+         * [Making debugging easier](#making-debugging-easier)
+      * [Body](#body)
+         * [Object at the root level](#object-at-the-root-level)
+         * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
+         * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
+      * [Auth](#auth)
+      * [Inspiration](#inspiration)
+
 ## Headers
+<details>
+<summary>Click to expand</summary>
 
 ### Protected endpoints
 
-Use the `Authorization` header to consume protected endpoints. See the [Authorization](#authorization) section for more information on how to handle authorization and authentication.
+Use the `Authorization` header to consume protected endpoints. See the [Auth](#auth) section for more information on how to handle authorization and authentication.
 
 #### ✅
 
@@ -60,8 +93,11 @@ Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
 ```
 
 See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do this.
+</details>
 
 ## Body
+<details>
+<summary>Click to expand</summary>
 
 ### Object at the root level
 
@@ -186,6 +222,14 @@ Avoid including a key without a meaningful value:
     }
 }
 ```
+</details>
+
+## Auth
+
+<details>
+<summary>Click to expand</summary>
+TODO
+</details>
 
 ## Inspiration
 
