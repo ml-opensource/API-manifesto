@@ -145,8 +145,9 @@ Use headers to give the API information about the consumer to ease debugging. Th
 Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
 ```
 
-See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do this.
 </details>
+
+See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do this.
 
 # Responses
 
