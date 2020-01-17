@@ -1,11 +1,71 @@
 # API-manifesto
 Documents how to write APIs
 
+## Headers
+
+### Protected endpoints
+
+Use the `Authorization` header to consume protected endpoints. See the [Authorization](#authorization) section for more information on how to handle authorization and authentication.
+
+#### ✅
+
+Use `Authorization` to authorize:
+
+```bash
+Authorization = "Basic QWxhZGRpbjpPcGVuU2VzYW1l"
+```
+
+#### ⛔️
+
+Avoid using custom headers for authorization:
+
+```bash
+UserToken = "QWxhZGRpbjpPcGVuU2VzYW1l"
+```
+
+### Supporting localization
+
+In order to support localization now and in the future, the `Accept-Language` should be used to indicate the client's language towards the API. 
+
+#### ✅
+
+Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
+
+```bash
+Accept-Language = da
+```
+
+Use a prioritized list of languages to influence the fallback language:
+
+```bash
+Accept-Language = da, en
+```
+
+#### ⛔️
+
+Avoid using other standards than ISO 639-1 for specifying the preferred language:
+
+```bash
+Accept-Language = danish
+```
+
+### Making debugging easier
+
+Use headers to give the API information about the consumer to ease debugging. There's no industry standard, so feel free to make your own convention, just remember to use it consistently.
+
+#### ✅
+
+```bash
+Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
+```
+
+See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do this.
+
 ## Body
 
 ### Object at the root level
 
-A body should always return an object at the root level. This enables including additional data about the response such as metadata separate from the object(s). We recommend using `data` for succesful requests with meaningful response data and `error` for unsuccesful requests with error data being returned.
+A body should always return an object at the root level. This enables including additional data about the response such as metadata separate from the object(s). We recommend using `data` for successful requests with meaningful response data and `error` for unsuccessful requests with error data being returned.
 
 #### ✅
 
@@ -79,7 +139,9 @@ To make it easier for the API consumer, return HTTP status code `200` with an em
 Combine HTTP status code `200` with empty collections:
 
 ```json
-[]
+{
+    "data": []
+}
 ```
 
 #### ⛔️
