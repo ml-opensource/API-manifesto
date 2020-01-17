@@ -35,7 +35,8 @@ Table of Contents
    * [Table of Contents](#table-of-contents)
    * [Requests](#requests)
       * [URLs](#urls)
-         * [TODO](#todo)
+         * [Prefix API endpoints](#prefix-api-endpoints)
+         * [API versioning](#api-versioning)
       * [Request Headers](#request-headers)
          * [Protected endpoints](#protected-endpoints)
          * [Supporting localization](#supporting-localization)
@@ -46,17 +47,17 @@ Table of Contents
          * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
       * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
       * [Status Codes](#status-codes)
-         * [TODO](#todo-1)
+         * [TODO](#todo)
    * [Auth](#auth)
-      * [TODO](#todo-2)
+      * [TODO](#todo-1)
    * [Error Handling](#error-handling)
-      * [TODO](#todo-3)
+      * [TODO](#todo-2)
    * [Localization](#localization)
-      * [TODO](#todo-4)
+      * [TODO](#todo-3)
    * [Timeouts](#timeouts)
-      * [TODO](#todo-5)
+      * [TODO](#todo-4)
    * [Pagination](#pagination)
-      * [TODO](#todo-6)
+      * [TODO](#todo-5)
    * [Inspiration](#inspiration)
    
 # Requests
@@ -338,66 +339,66 @@ Avoid including a key without a meaningful value:
 
 # Auth
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Error Handling
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Localization
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Timeouts
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Pagination
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
