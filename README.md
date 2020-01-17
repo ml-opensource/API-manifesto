@@ -10,37 +10,77 @@ New section template:
 ## Section
 <details>
 <summary>Click to expand</summary>
-TODO
-</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
 -->
 
-# API-manifesto
+# API Manifesto
 Documents how to write APIs
+
+## Introduction
+
+TODO
 
 Table of Contents
 =================
 
-   * [API-manifesto](#api-manifesto)
-      * [Headers](#headers)
-         * [Protected endpoints](#protected-endpoints)
-         * [Supporting localization](#supporting-localization)
-         * [Making debugging easier](#making-debugging-easier)
-      * [Body](#body)
-         * [Object at the root level](#object-at-the-root-level)
-         * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
+   * [API Manifesto](#api-manifesto)
+      * [Introduction](#introduction)
+   * [Table of Contents](#table-of-contents)
+      * [Requests](#requests)
+         * [URLs](#urls)
+            * [TODO](#todo)
+         * [Request Headers](#request-headers)
+            * [Protected endpoints](#protected-endpoints)
+            * [Supporting localization](#supporting-localization)
+            * [Making debugging easier](#making-debugging-easier)
+      * [Responses](#responses)
+         * [Response Body](#response-body)
+            * [Object at the root level](#object-at-the-root-level)
+            * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
          * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
+         * [Status Codes](#status-codes)
+            * [TODO](#todo-1)
       * [Auth](#auth)
+         * [TODO](#todo-2)
+      * [Error Handling](#error-handling)
+         * [TODO](#todo-3)
+      * [Localization](#localization)
+         * [TODO](#todo-4)
+      * [Timeouts](#timeouts)
+         * [TODO](#todo-5)
+      * [Pagination](#pagination)
+         * [TODO](#todo-6)
       * [Inspiration](#inspiration)
+## Requests
 
-## Headers
+### URLs
 <details>
 <summary>Click to expand</summary>
 
-### Protected endpoints
+#### TODO
+
+##### ✅
+
+##### ⛔️
+
+</details>
+
+### Request Headers
+<details>
+<summary>Click to expand</summary>
+
+#### Protected endpoints
 
 Use the `Authorization` header to consume protected endpoints. See the [Auth](#auth) section for more information on how to handle authorization and authentication.
 
-#### ✅
+##### ✅
 
 Use `Authorization` to authorize:
 
@@ -48,7 +88,7 @@ Use `Authorization` to authorize:
 Authorization = "Basic QWxhZGRpbjpPcGVuU2VzYW1l"
 ```
 
-#### ⛔️
+##### ⛔️
 
 Avoid using custom headers for authorization:
 
@@ -56,11 +96,11 @@ Avoid using custom headers for authorization:
 UserToken = "QWxhZGRpbjpPcGVuU2VzYW1l"
 ```
 
-### Supporting localization
+#### Supporting localization
 
 In order to support localization now and in the future, the `Accept-Language` should be used to indicate the client's language towards the API. 
 
-#### ✅
+##### ✅
 
 Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
 
@@ -74,7 +114,7 @@ Use a prioritized list of languages to influence the fallback language:
 Accept-Language = da, en
 ```
 
-#### ⛔️
+##### ⛔️
 
 Avoid using other standards than ISO 639-1 for specifying the preferred language:
 
@@ -82,11 +122,11 @@ Avoid using other standards than ISO 639-1 for specifying the preferred language
 Accept-Language = danish
 ```
 
-### Making debugging easier
+#### Making debugging easier
 
 Use headers to give the API information about the consumer to ease debugging. There's no industry standard, so feel free to make your own convention, just remember to use it consistently.
 
-#### ✅
+##### ✅
 
 ```bash
 Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
@@ -95,15 +135,17 @@ Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
 See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do this.
 </details>
 
-## Body
+## Responses
+
+### Response Body
 <details>
 <summary>Click to expand</summary>
 
-### Object at the root level
+#### Object at the root level
 
 A body should always return an object at the root level. This enables including additional data about the response such as metadata separate from the object(s). We recommend using `data` for successful requests with meaningful response data and `error` for unsuccessful requests with error data being returned.
 
-#### ✅
+##### ✅
 
 Returning a collection should be encapsulated in a key:
 
@@ -142,7 +184,7 @@ Returning an error should use the `error` key:
 
 Please see the [error section](#errors) for more information.
 
-#### ⛔️
+##### ⛔️
 
 Avoid returning collections at the top level in the response:
 
@@ -166,11 +208,11 @@ Avoid returning data that are not encapsulated in a root key (`data` or `error`)
 }
 ```
 
-### Return an empty collection when there are no results
+#### Return an empty collection when there are no results
 
 To make it easier for the API consumer, return HTTP status code `200` with an empty collection instead of e.g. `204` with no body.
 
-#### ✅
+##### ✅
 
 Combine HTTP status code `200` with empty collections:
 
@@ -180,7 +222,7 @@ Combine HTTP status code `200` with empty collections:
 }
 ```
 
-#### ⛔️
+##### ⛔️
 
 Avoid using HTTP status code `204` for empty collections.
 
@@ -188,7 +230,7 @@ Avoid using HTTP status code `204` for empty collections.
 
 To make the API explicit and to make it easier for the consumer, always return keys without values as `null` or unset them.
 
-#### ✅
+##### ✅
 
 Return a value as `null`:
 
@@ -211,7 +253,7 @@ Unset a key without a value:
 }
 ```
 
-#### ⛔️
+##### ⛔️
 
 Avoid including a key without a meaningful value:
 
@@ -224,11 +266,81 @@ Avoid including a key without a meaningful value:
 ```
 </details>
 
+### Status Codes
+<details>
+<summary>Click to expand</summary>
+
+#### TODO
+
+##### ✅
+
+##### ⛔️
+
+</details>
+
 ## Auth
 
 <details>
 <summary>Click to expand</summary>
-TODO
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
+
+## Error Handling
+
+<details>
+<summary>Click to expand</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
+
+## Localization
+
+<details>
+<summary>Click to expand</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
+
+## Timeouts
+
+<details>
+<summary>Click to expand</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
+</details>
+
+## Pagination
+
+<details>
+<summary>Click to expand</summary>
+
+### TODO
+
+#### ✅
+
+#### ⛔️
+
 </details>
 
 ## Inspiration
