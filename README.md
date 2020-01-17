@@ -29,7 +29,7 @@ In order to support localization now and in the future, the `Accept-Language` sh
 
 #### ✅
 
-Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred return language.
+Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
 
 ```bash
 Accept-Language = da
@@ -65,7 +65,7 @@ See [N-Meta](https://github.com/nodes-vapor/n-meta) for inspiration on how to do
 
 ### Object at the root level
 
-A body should always return an object at the root level. This enables including additional data about the response such as metadata separate from the object(s). We recommend using `data` for succesful requests with meaningful response data and `error` for unsuccesful requests with error data being returned.
+A body should always return an object at the root level. This enables including additional data about the response such as metadata separate from the object(s). We recommend using `data` for successful requests with meaningful response data and `error` for unsuccessful requests with error data being returned.
 
 #### ✅
 
@@ -139,7 +139,9 @@ To make it easier for the API consumer, return HTTP status code `200` with an em
 Combine HTTP status code `200` with empty collections:
 
 ```json
-[]
+{
+    "data": []
+}
 ```
 
 #### ⛔️
