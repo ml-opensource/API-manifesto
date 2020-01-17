@@ -63,16 +63,48 @@ Table of Contents
 
 ## URLs
 
-### TODO
+### Prefix API endpoints
+
+Prefix API endpoints with `/api/` to separate them from other URLs like HTML views served on the same server.
 
 <details>
 <summary>Click to see examples</summary>
 
 #### ✅
 
-#### ⛔️
+Make sure to prefix your API endpoints with `/api/`:
+
+```bash
+www.example.com/api/v1/products/1
+```
 
 </details>
+
+### API versioning
+
+Versioning your API allows you to make non-backwards compatible changes to your API for newer clients by introducing new versions of endpoints while not breaking existing clients.
+
+Include the API version in the URL. Versions start with 1 and are prefixed with `v`. The version path component should come right after the [`api`](#prefix-api-endpoints) path component.
+
+In case of an existing API that doesn't have this versioning scheme but needs a new version, skip `v1` and go straight to `v2`.
+
+> We're not recommending to use the headers (typically the Accept header) for versioning. The URL based approach is more obvious, usually simpler to implement, and testing URLs can be done in the browser.
+
+#### ✅
+
+Include the API's version in the URL:
+
+```bash
+www.example.com/api/v2/auth/login
+```
+
+#### ⛔️
+
+Don't depend on a header like "Accept" for versioning:
+
+```bash
+Accept = "application/vnd.example.v1+json"
+```
 
 ## Request Headers
 
@@ -113,13 +145,13 @@ In order to support localization now and in the future, the `Accept-Language` sh
 Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
 
 ```bash
-Accept-Language = da
+Accept-Language = "da"
 ```
 
 Use a prioritized list of languages to influence the fallback language:
 
 ```bash
-Accept-Language = da, en
+Accept-Language = "da, en"
 ```
 
 #### ⛔️
@@ -127,7 +159,7 @@ Accept-Language = da, en
 Avoid using other standards than ISO 639-1 for specifying the preferred language:
 
 ```bash
-Accept-Language = danish
+Accept-Language = "danish"
 ```
 
 </details>
