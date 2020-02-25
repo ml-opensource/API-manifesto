@@ -35,7 +35,8 @@ Table of Contents
    * [Table of Contents](#table-of-contents)
    * [Requests](#requests)
       * [URLs](#urls)
-         * [TODO](#todo)
+         * [Prefix API endpoints](#prefix-api-endpoints)
+         * [API versioning](#api-versioning)
       * [Request Headers](#request-headers)
          * [Protected endpoints](#protected-endpoints)
          * [Supporting localization](#supporting-localization)
@@ -46,33 +47,164 @@ Table of Contents
          * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
       * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
       * [Status Codes](#status-codes)
-         * [TODO](#todo-1)
+         * [TODO](#todo)
    * [Auth](#auth)
-      * [TODO](#todo-2)
+      * [TODO](#todo-1)
    * [Error Handling](#error-handling)
-      * [TODO](#todo-3)
+      * [TODO](#todo-2)
    * [Localization](#localization)
-      * [TODO](#todo-4)
+      * [TODO](#todo-3)
    * [Timeouts](#timeouts)
-      * [TODO](#todo-5)
+      * [TODO](#todo-4)
    * [Pagination](#pagination)
-      * [TODO](#todo-6)
+      * [TODO](#todo-5)
    * [Inspiration](#inspiration)
    
 # Requests
 
 ## URLs
 
-### TODO
+### Prefix API endpoints
+
+Prefix API endpoints with `/api/` to separate them from other URLs like HTML views served on the same server.
 
 <details>
 <summary>Click to see examples</summary>
 
 #### ✅
 
-#### ⛔️
+Make sure to prefix your API endpoints with `/api/`:
+
+```bash
+www.example.com/api/v1/products/1
+```
 
 </details>
+
+### API versioning
+
+Versioning your API allows you to make non-backwards compatible changes to your API for newer clients by introducing new versions of endpoints while not breaking existing clients.
+
+Include the API version in the URL. Versions start with 1 and are prefixed with `v`. The version path component should come right after the [`api`](#prefix-api-endpoints) path component.
+
+In case of an existing API that doesn't have this versioning scheme but needs a new version, skip `v1` and go straight to `v2`.
+
+> We're not recommending to use the headers (typically the Accept header) for versioning. The URL based approach is more obvious, usually simpler to implement, and testing URLs can be done in the browser.
+
+<details>
+<summary>Click to see examples</summary>
+
+#### ✅
+
+Include the API's version in the URL:
+
+```bash
+www.example.com/api/v2/auth/login
+```
+
+#### ⛔️
+
+Don't depend on a header like "Accept" for versioning:
+
+```bash
+Accept = "application/vnd.example.v1+json"
+```
+
+</details>
+
+### REST resources
+After the API prefix and the version comes the part of the URL path that identifies the resource -- the piece of data you are interested in. Refer to a type of resource with a plural noun (eg. "users"). Directly following such a noun can be an identifier that points to a single instance.
+A resource can also be nested, usually if there some sort of parent/child relationship. This can be expressed by appending another plural noun to the URL.
+
+<details>
+<summary>Click to see examples</summary>
+
+#### ✅
+
+Refer to a resource with a plural noun:
+
+```bash
+/api/v1/shops
+```
+
+#### ✅
+
+Use an identifier following a noun to refer to a single entity:
+
+```bash
+/api/v1/products/42
+```
+
+#### ✅
+
+Refer to a nested resource like so:
+
+```bash
+/api/v1/posts/1/comments
+```
+
+In some cases it can be ok to simplify and have the child object at the beginning as long as the child object's id is globally unique:
+
+```bash
+/api/v1/comments/87
+```
+
+Be careful with this since this approach lack the extra safety of asserting that the resource you are referring to belongs to the parent resource you think it does.
+
+</details>
+
+### Query parameters
+
+Query parameters are like meta data to the (usually GET) URL request. They can be used when you need more control over what data should be returned. Good use cases include filters and sorting. Some things are better suited for headers, such as providing authentication and indicating the preferred encoding type.
+
+<details>
+<summary>Click to see examples</summary>
+
+#### ✅
+
+Use query parameters for a paginated endpoint to define which page and with how many results per page you want to retrieve:
+
+```bash
+/api/v1/posts?page=2&perPage=10
+```
+
+#### ⛔️
+
+Do not use query parameters for authentication:
+
+```bash
+/api/v1/posts?apiKey=a7dhas8u
+```
+
+</details>
+
+### HTTP Methods
+
+HTTP methods are used to indicate what action to perform with the resource.
+
+#### GET
+
+A GET call is used to retrieve data and should not result in changes to the accessed resource. Multiple identical requests should have the same effect as a single request (idempotency).
+
+#### POST
+
+POST is used to create new resources.
+
+#### PATCH
+
+PATCH requests modify existing resources. Only fields that need to be updated need to be included - all others will be left as they are. In order to "unset" optional properties use `null` for the value.
+
+#### PUT
+
+With PUT calls we can replace entire objects. Only the database identifier should not be changed.
+
+#### DELETE
+
+To delete a resource, use the DELETE method.
+
+#### HEAD
+
+A HEAD call must never return a body. It can be used to see if an object exists and to see if a cached value is still up to date.
 
 ## Request Headers
 
@@ -113,13 +245,13 @@ In order to support localization now and in the future, the `Accept-Language` sh
 Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
 
 ```bash
-Accept-Language = da
+Accept-Language = "da"
 ```
 
 Use a prioritized list of languages to influence the fallback language:
 
 ```bash
-Accept-Language = da, en
+Accept-Language = "da, en"
 ```
 
 #### ⛔️
@@ -127,7 +259,7 @@ Accept-Language = da, en
 Avoid using other standards than ISO 639-1 for specifying the preferred language:
 
 ```bash
-Accept-Language = danish
+Accept-Language = "danish"
 ```
 
 </details>
@@ -248,9 +380,9 @@ Avoid using HTTP status code `204` for empty collections.
 
 </details>
 
-## Use `null` or unset keys that are not set
+### Use `null` or unset keys that are not set
 
-To make the API explicit and to make it easier for the consumer, always return keys without values as `null` or unset them.
+In case of missing values return them as `null` or don't include them. Do not use empty objects or empty strings.
 
 <details>
 <summary>Click to see examples</summary>
@@ -306,66 +438,66 @@ Avoid including a key without a meaningful value:
 
 # Auth
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Error Handling
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Localization
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Timeouts
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
 # Pagination
 
-### TODO
+## TODO
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+### ✅
 
-#### ⛔️
+### ⛔️
 
 </details>
 
