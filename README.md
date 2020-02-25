@@ -91,6 +91,9 @@ In case of an existing API that doesn't have this versioning scheme but needs a 
 
 > We're not recommending to use the headers (typically the Accept header) for versioning. The URL based approach is more obvious, usually simpler to implement, and testing URLs can be done in the browser.
 
+<details>
+<summary>Click to see examples</summary>
+
 #### ✅
 
 Include the API's version in the URL:
@@ -106,6 +109,8 @@ Don't depend on a header like "Accept" for versioning:
 ```bash
 Accept = "application/vnd.example.v1+json"
 ```
+
+</details>
 
 ### REST resources
 After the API prefix and the version comes the part of the URL path that identifies the resource -- the piece of data you are interested in. Refer to a type of resource with a plural noun (eg. "users"). Directly following such a noun can be an identifier that points to a single instance.
