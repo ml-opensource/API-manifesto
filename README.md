@@ -107,6 +107,98 @@ Don't depend on a header like "Accept" for versioning:
 Accept = "application/vnd.example.v1+json"
 ```
 
+### REST resources
+After the API prefix and the version comes the part of the URL path that identifies the resource -- the piece of data you are interested in. Refer to a type of resource with a plural noun (eg. "users"). Directly following such a noun can be an identifier that points to a single instance.
+A resource can also be nested, usually if there some sort of parent/child relationship. This can be expressed by appending another plural noun to the URL.
+
+<details>
+<summary>Click to see examples</summary>
+
+#### ✅
+
+Refer to a resource with a plural noun:
+
+```bash
+/api/v1/shops
+```
+
+#### ✅
+
+Use an identifier following a noun to refer to a single entity:
+
+```bash
+/api/v1/products/42
+```
+
+#### ✅
+
+Refer to a nested resource like so:
+
+```bash
+/api/v1/posts/1/comments
+```
+
+In some cases it can be ok to simplify and have the child object at the beginning as long as the child object's id is globally unique:
+
+```bash
+/api/v1/comments/87
+```
+
+Be careful with this since this approach lack the extra safety of asserting that the resource you are referring to belongs to the parent resource you think it does.
+
+#### ⛔️
+
+### Query parameters
+
+Query parameters are like meta data to the (usually GET) URL request. They can be used when you need more control over what data should be returned. Good use cases include filters and sorting. Some things are better suited for headers, such as providing authentication and indicating the preferred encoding type.
+
+<details>
+<summary>Click to see examples</summary>
+
+#### ✅
+
+Use query parameters for a paginated endpoint to define which page and with how many results per page you want to retrieve:
+
+```bash
+/api/v1/posts?page=2&perPage=10
+```
+
+#### ⛔️
+
+Do not use query parameters for authentication:
+
+```bash
+/api/v1/posts?apiKey=a7dhas8u
+```
+
+### HTTP Methods
+
+HTTP methods are used to indicate what action to perform with the resource.
+
+#### GET
+
+A GET call is used to retrieve data and should not result in changes to the accessed resource. Multiple identical requests should have the same effect as a single request (idempotency).
+
+#### POST
+
+POST is used to create new resources.
+
+#### PATCH
+
+PATCH requests modify existing resources. Only fields that need to be updated need to be included - all others will be left as they are. In order to "unset" optional properties use `null` for the value.
+
+#### PUT
+
+With PUT calls we can replace entire objects. Only the database identifier should not be changed.
+
+#### DELETE
+
+To delete a resource, use the DELETE method.
+
+#### HEAD
+
+A HEAD call must never return a body. It can be used to see if an object exists and to see if a cached value is still up to date.
+
 ## Request Headers
 
 ### Protected endpoints
