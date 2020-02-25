@@ -380,9 +380,9 @@ Avoid using HTTP status code `204` for empty collections.
 
 </details>
 
-## Use `null` or unset keys that are not set
+### Use `null` or unset keys that are not set
 
-To make the API explicit and to make it easier for the consumer, always return keys without values as `null` or unset them.
+In case of missing values return them as `null` or don't include them. Do not use empty objects or empty strings.
 
 <details>
 <summary>Click to see examples</summary>
