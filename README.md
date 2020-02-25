@@ -151,7 +151,7 @@ In some cases it can be ok to simplify and have the child object at the beginnin
 
 Be careful with this since this approach lack the extra safety of asserting that the resource you are referring to belongs to the parent resource you think it does.
 
-#### ⛔️
+</details>
 
 ### Query parameters
 
@@ -175,6 +175,8 @@ Do not use query parameters for authentication:
 ```bash
 /api/v1/posts?apiKey=a7dhas8u
 ```
+
+</details>
 
 ### HTTP Methods
 
