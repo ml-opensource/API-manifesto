@@ -5,6 +5,14 @@ use the following command: `gh-md-toc README.md | grep -v g-emoji` to filter out
 -->
 
 <!--
+---
+title: API Manifesto
+tags: [api,manifesto,best practice]
+link: https://github.com/monstar-lab-oss/API-manifesto
+---
+-->
+
+<!--
 New section template:
 
 ## Section
