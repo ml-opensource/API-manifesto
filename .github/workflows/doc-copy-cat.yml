@@ -1,0 +1,26 @@
+name: Doc copy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  copycat:
+    name: Copy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Documentation copycat
+        uses: andstor/copycat-action@v3
+        with:
+          dst_branch: master
+          dst_owner: monstar-lab-group
+          dst_repo_name: documentation
+          dst_path: /resources/mds/monstar-lab-oss/api-manifesto
+          personal_token: ${{ secrets.GH_PAT }}
+          src_branch: master
+          src_path: /.
+          src_wiki: "false"
+          username: DocCopyCat
+          email: bot@monstar-lab.com
+          clean: true
