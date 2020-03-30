@@ -466,7 +466,55 @@ Avoid including a key without a meaningful value:
 
 ### ✅
 
+The error object needs to have following: 
+ - Be consistent
+ - Have all required info
+ - Easy parsable
+ - Should be possible to build a solid UI on top, guiding the user what happened, and how to move on
+
+```
+{
+  "error": {
+    "localizedTitle": "Title goes here", // Optional title localized for end user
+    "localizedMessage": "Message goes here", // Optional message localized for end user
+    "message": "Invalid format, digits required", // Message for developer
+    "isRecoverable": true, // Is the error handled in the UI is fatal or can it be recovered, eg: try again
+    "code": "1202", // Code which the consumer of the API can parse and switch case on
+    "source": "LoginService" // In micro services architecture, you might want to understand what service
+  },
+  "payload": {
+      "validationErrors": [
+          {
+            "field": "password",
+            "errors": 
+            [
+                {
+                  "type": "required",
+                  "localizedMessage": "Please enter a password"
+                },
+                {
+                  "type": "regex",
+                  "localizedMessage": "Password format should have following: 8 charts, 1 small leter, 1 big letter & 1 number"
+                },
+            ]
+          }
+        ]
+      }
+  },
+  "metadata": {
+    "errorID": "1234-ABC" // Optional ID for if the error is stored in DB, APM, Bug tracking tools like Bugsnag, Sentry, Rollbar, New Relic etc.
+  }
+}
+
+```
+
 ### ⛔️
+
+```json
+{
+  "error": "Internal server error"
+}
+```
 
 </details>
 
