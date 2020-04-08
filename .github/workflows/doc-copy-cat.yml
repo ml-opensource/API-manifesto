@@ -16,7 +16,7 @@ jobs:
           dst_branch: master
           dst_owner: monstar-lab-group
           dst_repo_name: documentation
-          dst_path: /resources/mds/monstar-lab-oss/api-manifesto
+          dst_path: /resources/mds/monstar-lab-oss/api-manifesto/*
           personal_token: ${{ secrets.GH_PAT }}
           src_branch: master
           src_path: /.
