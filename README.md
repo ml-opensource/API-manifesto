@@ -479,7 +479,7 @@ The error object needs to have the following:
     "localizedMessage": "Message goes here", // Optional message localized for end user
     "message": "Invalid format, digits required", // Message for developer
     "isRecoverable": true, // Is the error handled in the UI is fatal or can it be recovered, eg: try again
-    "identifier": "1202", // Identifier which the consumer of the API can parse and switch case on
+    "identifier": "PASSWORD_NOT_FOLLOWING_PATTERN", // Identifier which the consumer of the API can parse and switch case on
     "source": "LoginService" // In micro services architecture, you might want to understand what service
   },
   "payload": {
