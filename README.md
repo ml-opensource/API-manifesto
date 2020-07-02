@@ -466,7 +466,7 @@ Avoid including a key without a meaningful value:
 
 ### ✅
 
-The error object needs to have following: 
+The error object needs to have the following: 
  - Be consistent
  - Have all required info
  - Easy parsable
