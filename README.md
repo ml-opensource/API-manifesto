@@ -472,14 +472,14 @@ The error object needs to have the following:
  - Easy parsable
  - Should be possible to build a solid UI on top, guiding the user what happened, and how to move on
 
-```
+```json
 {
   "error": {
     "localizedTitle": "Title goes here", // Optional title localized for end user
     "localizedMessage": "Message goes here", // Optional message localized for end user
     "message": "Invalid format, digits required", // Message for developer
     "isRecoverable": true, // Is the error handled in the UI is fatal or can it be recovered, eg: try again
-    "code": "1202", // Code which the consumer of the API can parse and switch case on
+    "identifier": "1202", // Identifier which the consumer of the API can parse and switch case on
     "source": "LoginService" // In micro services architecture, you might want to understand what service
   },
   "payload": {
