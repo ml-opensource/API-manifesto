@@ -488,14 +488,50 @@ Avoid including a key without a meaningful value:
 
 # Timeouts
 
-## TODO
+Generally APIs should respond in less than 250ms on a wired connection. There needs to be a special reason for exeeding that. And the developer needs to understand that it will be harder / more expensive to scale the backend if response times are high.
+
+It's common that the webserver configuration will timeout the request in 30 or 60 sec. 
+
+## Client to server
+
+Since you never know what network the client is on, if they are in a metro or 100mBit wifi. Response time can very a lot for several reason.
+Therefore set timeouts to:
 
 <details>
 <summary>Click to see examples</summary>
 
 ### ✅
 
+__Default:__ 15 sec
+
+__File upload APIs:__ Align with web server timeout (eg 30 or 60 sec)
+
+_If you are going to upload files above 5mb, consider having client upload directly to AWS S3, Dropbox etc. And sending path to server._
+
 ### ⛔️
+
+__+ 30sec__
+
+If API requests are taking more than 2sec on wired connection, reconsider change of api design. 
+Eg: Put the operation in a queue system like SQS, Redis, Beanstalkd and inform the client about operation is complete by push notification, web socket, email etc
+
+</details>
+
+## Server to server
+
+Server to service APIs should always be very stabile due to connection is wiried and stable. Therefore we can be much more aggresive about timeouts
+<details>
+<summary>Click to see examples</summary>
+
+### ✅
+
+Depending on service: 1-5sec timeouts. 
+
+Implement a retry system. If the server is not responding in 1-5 sec, there is a high chance they never respond. Just fail and retry, up to a max og 3-5 retries, and then throw exception
+
+### ⛔️
+
+__+10 sec__
 
 </details>
 
