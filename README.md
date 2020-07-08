@@ -459,8 +459,6 @@ Avoid including a key without a meaningful value:
 
 # Error Handling
 
-## TODO
-
 <details>
 <summary>Click to see examples</summary>
 
@@ -469,43 +467,37 @@ Avoid including a key without a meaningful value:
 The error object needs to have the following: 
  - Be consistent
  - Have all required info
- - Easy parsable
+ - Easily parsable
  - Should be possible to build a solid UI on top, guiding the user what happened, and how to move on
 
-```json
+```js
 {
-  "error": {
-    "localizedTitle": "Title goes here", // Optional title localized for end user
-    "localizedMessage": "Message goes here", // Optional message localized for end user
-    "message": "Invalid format, digits required", // Message for developer
-    "isRecoverable": true, // Is the error handled in the UI is fatal or can it be recovered, eg: try again
-    "identifier": "PASSWORD_NOT_FOLLOWING_PATTERN", // Identifier which the consumer of the API can parse and switch case on
-    "source": "LoginService" // In micro services architecture, you might want to understand what service
-  },
-  "payload": {
-      "validationErrors": [
-          {
+    "error": {
+        "localizedTitle": "Title goes here", // Optional title localized for end user
+        "localizedMessage": "Message goes here", // Optional message localized for end user
+        "message": "Invalid format, digits required", // Message for developer
+        "isRecoverable": true, // Is the error handled in the UI is fatal or can it be recovered, eg: try again
+        "identifier": "PASSWORD_NOT_FOLLOWING_PATTERN", // Identifier which the consumer of the API can parse and switch case on
+        "source": "LoginService" // In micro services architecture, you might want to understand what service
+    },
+    "payload": {
+        "validationErrors": [{
             "field": "password",
-            "errors": 
-            [
-                {
-                  "type": "required",
-                  "localizedMessage": "Please enter a password"
+            "errors": [{
+                    "type": "required",
+                    "localizedMessage": "Please enter a password"
                 },
                 {
-                  "type": "regex",
-                  "localizedMessage": "Password format should have following: 8 charts, 1 small leter, 1 big letter & 1 number"
+                    "type": "regex",
+                    "localizedMessage": "Password format should have following: 8 characters, 1 small letter, 1 big letter & 1 number"
                 },
             ]
-          }
-        ]
-      }
-  },
-  "metadata": {
-    "errorID": "1234-ABC" // Optional ID for if the error is stored in DB, APM, Bug tracking tools like Bugsnag, Sentry, Rollbar, New Relic etc.
-  }
+        }]
+    },
+    "metadata": {
+        "errorID": "1234-ABC" // Optional ID for if the error is stored in DB, APM, Bug tracking tools like Bugsnag, Sentry, Rollbar, New Relic etc.
+    }
 }
-
 ```
 
 ### ⛔️
