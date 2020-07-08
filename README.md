@@ -287,9 +287,11 @@ Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
 
 </details>
 
-See [N-Meta-Vapor](https://github.com/nodes-vapor/n-meta)
-See [N-Meta-PHP](https://github.com/monstar-lab-oss/n-meta-php)
-See [N-Meta-Laravel](https://github.com/monstar-lab-oss/n-meta-laravel)
+See:
+
+    - [N-Meta-Vapor](https://github.com/nodes-vapor/n-meta)    
+    - [N-Meta-PHP](https://github.com/monstar-lab-oss/n-meta-php)
+    - [N-Meta-Laravel](https://github.com/monstar-lab-oss/n-meta-laravel)
 
 # Responses
 
