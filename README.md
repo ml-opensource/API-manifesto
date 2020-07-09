@@ -494,7 +494,7 @@ It's common that the webserver configuration will timeout the request in 30 or 6
 
 ## Client to server
 
-Since you never know what network the client is on, if they are in a metro or 100mBit wifi. Response time can very a lot for several reason.
+Since you never know what network the client is on, if they are in a metro or 100mBit wifi. Response time can vary a lot for several reason.
 Therefore set timeouts to:
 
 <details>
