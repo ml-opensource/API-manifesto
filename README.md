@@ -525,7 +525,7 @@ Server to service APIs should always be very stable due to connection being wire
 
 ### ✅
 
-Depending on service: 1-5sec timeouts. 
+Depending on service: 1-5 sec timeouts.
 
 Implement a retry system. If the server is not responding in 1-5 sec, there is a high chance they never respond. Just fail and retry, up to a max of 3-5 retries, and then throw exception.
 
