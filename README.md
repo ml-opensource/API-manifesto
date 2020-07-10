@@ -519,7 +519,7 @@ Eg: Put the operation in a queue system like SQS, Redis, Beanstalkd and inform t
 
 ## Server to server
 
-Server to service APIs should always be very stable due to connection is wired and stable. Therefore we can be much more aggressive about timeouts
+Server to service APIs should always be very stable due to connection being wired and stable. Therefore we can be much more aggressive about timeouts.
 <details>
 <summary>Click to see examples</summary>
 
