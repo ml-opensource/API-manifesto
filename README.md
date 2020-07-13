@@ -36,7 +36,7 @@ Documents how to write APIs
 This API Manifesto is a fast and easy overview of the most important elements for building a rock-solid API, which both the backend and frontend team enjoys working with.
 APIs are suppose to be very strict, it's a contract between Backend & Frontend. In the same time, there is no reason for APIs to be different depending on which language / framework was used in the Backend. 
 
-This is not a full blown manifesto, check the [Inspiration section](#inspiration) for full content
+This is not a full blown manifesto, check the [Inspiration section](#inspiration) for references to other manifestos with more details.
 
 Table of Contents
 =================
