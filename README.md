@@ -33,7 +33,10 @@ Documents how to write APIs
 
 ## Introduction
 
-TODO
+This API Manifesto is a fast and easy overview of the most important elements for building a rock-solid API, which both the backend and frontend team enjoys working with.
+APIs are suppose to be very strict, it's a contract between Backend & Frontend. In the same time, there is no reason for APIs to be different depending on which language / framework was used in the Backend. 
+
+This is not a full blown manifesto, check the [Inspiration section](#inspiration) for references to other manifestos with more details.
 
 Table of Contents
 =================
@@ -555,4 +558,5 @@ These guidelines have been made with inspiration from the following API guidelin
 - [Microsoft API Guidelines](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md)
 - [Zalando API Guidelines](https://opensource.zalando.com/restful-api-guidelines/)
 - [PayPal API Guidelines](https://github.com/paypal/api-standards/blob/master/api-style-guide.md)
-- [Atlassian API Guidelines](https://developer.atlassian.com/server/framework/atlassian-sdk/atlassian-rest-api-design-guidelines-version-1/)
+- [Atlassian API Guidelines](https://developer.atlassian.com/server/framework/atlassian-sdk/atlassian-rest-api-design-guidelines-version-1)
+- [JSON:API](https://jsonapi.org)
