@@ -490,7 +490,7 @@ Avoid including a key without a meaningful value:
 
 Generally APIs should respond in less than 250ms on a wired connection. There needs to be a special reason for exceeding that. Further, it is important to understand that it will be harder and more expensive to scale the backend if response times are high.
 
-It's common that the webserver configuration will timeout the request in 30 or 60 sec. 
+It's common that the webserver configuration will timeout the request after 30 or 60 seconds. 
 
 ## Client to server
 
