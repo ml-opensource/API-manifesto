@@ -512,7 +512,7 @@ _If you are going to upload files above 5mb, consider having client upload direc
 
 __+ 30sec__
 
-If API requests are taking more than 2 sec on a wired connection, reconsider change of API design. 
+If API requests are taking more than 2 sec on a wired connection, consider changing the API design. 
 Eg: Put the operation in a queue system like SQS, Redis, Beanstalkd and inform the client about operation is complete by push notification, web socket, email etc.
 
 </details>
