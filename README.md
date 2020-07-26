@@ -62,7 +62,6 @@ Table of Contents
    * [Auth](#auth)
       * [TODO](#todo-1)
    * [Error Handling](#error-handling)
-      * [TODO](#todo-2)
    * [Localization](#localization)
       * [TODO](#todo-3)
    * [Timeouts](#timeouts)
