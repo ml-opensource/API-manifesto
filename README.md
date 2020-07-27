@@ -58,7 +58,6 @@ Table of Contents
          * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
       * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
    * [Status Codes](#status-codes)
-      * [TODO](#todo)
    * [Auth](#auth)
       * [TODO](#todo-1)
    * [Error Handling](#error-handling)
@@ -439,14 +438,48 @@ Avoid including a key without a meaningful value:
 
 ## Status Codes
 
-### TODO
-
 <details>
 <summary>Click to see examples</summary>
 
 #### ✅
 
+It's ok to use all available response codes, [See list](https://www.restapitutorial.com/httpstatuscodes.html)
+
+Here is a list of the commonly used
+
+#### 2xx
+ - 200 -> OK, used when on GET request with successful response 
+ - 201 -> Created, used on POST creating a record in DB
+ - 202 -> Accepted, used when request has been received, but processed async
+ - 204 -> No content, used when no response is send, eg on DELETE
+
+#### 3xx
+ - 304 -> Not modified, used if If-Modified-Since header is send and nothing has changed since
+ 
+#### 4xx
+
+ - 400 -> Bad Request, used when request is no possible to process, remember to give more info
+ - 401 -> Unauthorized, used when authorization session is invalid or missing
+ - 403 -> Forbidden, used when a route / entity was requested, but users access level does not permit it 
+ - 404 -> Not Found, used when a route / entity was not found
+ - 405 -> Method not allowed, used when a route was hit with wrong method
+ - 422 -> Unprocessable Entity, used when validation rules on POST/PATCH/PUT are not followed
+ 
+#### 5xx 
+
+- 500 -> Internal server error, used for undefined server errors, should store a record in an Bug tracking tool like Bugsnag, Crashlytic, Rollbar, New relic   
+- 502 -> Bad Gateway, used when an internal service was not reachable, eg in micro service architecture
+- 503 -> Service Unavailable, used when an external service was not reachable, eg twilio.com 
+   
 #### ⛔️
+
+Custom response codes, eg:
+
+- 490 
+- 205
+- 512
+
+Use response body for the message instead
 
 </details>
 
