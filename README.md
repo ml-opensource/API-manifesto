@@ -448,28 +448,33 @@ It's ok to use all available response codes, [See list](https://www.restapitutor
 Here is a list of the commonly used
 
 #### 2xx
- - 200 -> OK, used when on GET request with successful response 
- - 201 -> Created, used on POST creating a record in DB
- - 202 -> Accepted, used when request has been received, but processed async
- - 204 -> No content, used when no response is send, eg on DELETE
+ - `200` -> **OK**, used when on `GET` request with successful response 
+ - `201` -> **Created**, used on `POST` creating a record in DB
+ - `202` -> **Accepted**, used when request has been received, but processed async
+ - `204` -> **No Content**, used when no response is send, e.g. on `DELETE`
 
 #### 3xx
- - 304 -> Not modified, used if If-Modified-Since header is send and nothing has changed since
+ - `301`-> **Moved Permanently**, used if the resource has been moved to another `URI`
+ - `304` -> **Not Modified**, used if `If-Modified-Since` header is send and nothing has changed since
  
 #### 4xx
 
- - 400 -> Bad Request, used when request is no possible to process, remember to give more info
- - 401 -> Unauthorized, used when authorization session is invalid or missing
- - 403 -> Forbidden, used when a route / entity was requested, but users access level does not permit it 
- - 404 -> Not Found, used when a route / entity was not found
- - 405 -> Method not allowed, used when a route was hit with wrong method
- - 422 -> Unprocessable Entity, used when validation rules on POST/PATCH/PUT are not followed
+ - `400` -> **Bad Request**, used when request cannot be processed, remember to give more info
+ - `401` -> **Unauthorized**, used when authorization session is invalid or missing
+ - `403` -> **Forbidden**, used when a route / entity was requested, but users access level does not permit it 
+ - `404` -> **Not Found**, used when a route / entity was not found
+ - `405` -> **Method Not Allowed**, used when a route was hit with wrong method
+ - `409` -> **Conflict**, used when an entity conflicts with another entity, e.g. duplicate entities / IDs
+ - `422` -> **Unprocessable Entity**, used when validation rules on `POST/PATCH/PUT` are not followed
+ - `429` -> **Too Many Requests**, used when you want to rate limit your API
  
 #### 5xx 
 
-- 500 -> Internal server error, used for undefined server errors, should store a record in an Bug tracking tool like Bugsnag, Crashlytic, Rollbar, New relic   
-- 502 -> Bad Gateway, used when an internal service was not reachable, eg in micro service architecture
-- 503 -> Service Unavailable, used when an external service was not reachable, eg twilio.com 
+- `500` -> **Internal Server Error**, used for undefined server errors, should store a record in an bug tracking tool like Bugsnag, Crashlytics, Rollbar, New relic
+- `501` -> **Not Implemented**, used when you want to indicate that the feature/functionality is not implemented (yet)
+- `502` -> **Bad Gateway**, used when an internal service was not reachable, e.g. in micro service architecture
+- `503` -> **Service Unavailable**, used when an external service was not reachable, e.g. twilio.com 
+- `504` -> **Gateway Timeout**, used to indicate that a request timed out (e.g. third party service took too long)
    
 #### ⛔️
 
