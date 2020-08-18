@@ -56,6 +56,7 @@ Table of Contents
       * [Response Body](#response-body)
          * [Object at the root level](#object-at-the-root-level)
          * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
+      * [Response Headers](#response-headers)
       * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
    * [Status Codes](#status-codes)
    * [Auth](#auth)
@@ -217,6 +218,54 @@ To delete a resource, use the DELETE method.
 A HEAD call must never return a body. It can be used to see if an object exists and to see if a cached value is still up to date.
 
 ## Request Headers
+
+This section goes through a couple of standard HTTP headers that we have found overselves using across various projects. These define the operating parameters of an HTTP transaction.
+
+### Content negotiation
+
+Using content negotiation, representations of a ressource are served differently at the same URI so the user agent can specify which format or content encoding suits best.
+
+<details>
+<summary>Click to see examples</summary>
+
+#### ✅
+
+Use `Accept` header to define the mime type the client is able to understand
+
+```bash
+Accept = "application/json"
+```
+
+#### ⛔️
+
+Avoid using the general default for all types
+
+```bash
+Accept = "*/*"
+```
+
+##### Encoding
+
+#### ✅
+
+Use `Accept-Encoding` header to inform the server which encoding(s) the client supports.
+
+```bash
+Accept-Encoding = "gzip, deflate, br"
+```
+
+#### ⛔️
+
+Avoid using the general default for all encoding types
+
+```bash
+Accept-Encoding = "*"
+```
+
+
+
+</details>
+
 
 ### Protected endpoints
 
@@ -435,6 +484,8 @@ Avoid including a key without a meaningful value:
 }
 ```
 </details>
+
+## Response Headers
 
 ## Status Codes
 
