@@ -262,8 +262,6 @@ Avoid using the general default for all encoding types
 Accept-Encoding = "*"
 ```
 
-
-
 </details>
 
 
