@@ -67,7 +67,8 @@ Table of Contents
       * [Client to Server](#client-to-server)
       * [Server to Server](#client-to-server)
    * [Pagination](#pagination)
-      * [TODO](#todo-5)
+      * [Offset Pagination](#offset-pagination)
+      * [Cursor-based Pagination](#cursor-based-pagination)
    * [Inspiration](#inspiration)
    
 # Requests
