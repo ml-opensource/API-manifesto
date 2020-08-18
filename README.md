@@ -265,14 +265,14 @@ Accept-Encoding = "*"
 </details>
 
 
-### Protected endpoints
+#### Protected endpoints
 
 Use the `Authorization` header to consume protected endpoints. See the [Auth](#auth) section for more information on how to handle authorization and authentication.
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+##### ✅
 
 Use `Authorization` to authorize:
 
@@ -280,7 +280,7 @@ Use `Authorization` to authorize:
 Authorization = "Basic QWxhZGRpbjpPcGVuU2VzYW1l"
 ```
 
-#### ⛔️
+##### ⛔️
 
 Avoid using custom headers for authorization:
 
@@ -290,14 +290,14 @@ UserToken = "QWxhZGRpbjpPcGVuU2VzYW1l"
 
 </details>
 
-### Supporting localization
+#### Supporting localization
 
 In order to support localization now and in the future, the `Accept-Language` should be used to indicate the client's language towards the API. 
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+##### ✅
 
 Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
 
@@ -311,7 +311,7 @@ Use a prioritized list of languages to influence the fallback language:
 Accept-Language = "da, en"
 ```
 
-#### ⛔️
+##### ⛔️
 
 Avoid using other standards than ISO 639-1 for specifying the preferred language:
 
@@ -321,14 +321,14 @@ Accept-Language = "danish"
 
 </details>
 
-### Making debugging easier
+#### Making debugging easier
 
 Use headers to give the API information about the consumer to ease debugging. There's no industry standard, so feel free to make your own convention, just remember to use it consistently.
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+##### ✅
 
 ```bash
 Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
