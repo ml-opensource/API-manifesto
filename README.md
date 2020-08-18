@@ -219,26 +219,26 @@ A HEAD call must never return a body. It can be used to see if an object exists 
 
 ## Request Headers
 
-This section goes through a couple of standard HTTP headers that we have found overselves using across various projects. These define the operating parameters of an HTTP transaction.
+This section goes through a couple of standard HTTP headers that we have found overselves using across various projects. A complete list of approved headers can be found in the [IANA Header Registry](https://www.iana.org/assignments/message-headers/message-headers.xhtml) with references to their respective RFC's.
 
-### Content negotiation
+#### Content negotiation
 
 Using content negotiation, representations of a ressource are served differently at the same URI so the user agent can specify which format or content encoding suits best.
 
 <details>
 <summary>Click to see examples</summary>
 
-#### ✅
+##### ✅
 
-Use `Accept` header to define the mime type the client is able to understand
+Use `Accept` header to define the mime type the client is able to understand.
 
 ```bash
 Accept = "application/json"
 ```
 
-#### ⛔️
+##### ⛔️
 
-Avoid using the general default for all types
+Avoid using the general default for all types.
 
 ```bash
 Accept = "*/*"
@@ -246,7 +246,7 @@ Accept = "*/*"
 
 ##### Encoding
 
-#### ✅
+##### ✅
 
 Use `Accept-Encoding` header to inform the server which encoding(s) the client supports.
 
@@ -254,9 +254,9 @@ Use `Accept-Encoding` header to inform the server which encoding(s) the client s
 Accept-Encoding = "gzip, deflate, br"
 ```
 
-#### ⛔️
+##### ⛔️
 
-Avoid using the general default for all encoding types
+Avoid using the general default for all encoding types.
 
 ```bash
 Accept-Encoding = "*"
@@ -484,6 +484,75 @@ Avoid including a key without a meaningful value:
 </details>
 
 ## Response Headers
+
+This section goes through a couple of standard HTTP headers that we have found overselves using across various projects. A complete list of approved headers can be found in the [IANA Header Registry](https://www.iana.org/assignments/message-headers/message-headers.xhtml) with references to their respective RFC's.
+
+#### Timestamp
+
+Use the `Date` header to timestamp the processed response based on the server's date and time format. This header **MUST** be included in the response.
+
+<details>
+<summary>Click to see examples</summary>
+<br/>
+
+##### ✅
+
+```bash
+Date = "Tue, 18 Aug 2020 12:53:03 GMT"
+```
+
+##### ⛔️
+
+Do not send back an empty value to the `Date` key.
+
+```bash
+Date = ""
+```
+
+</details>
+
+#### Content negotiation
+
+Using content negotiation, representations of a ressource are served differently at the same URI. The headers below describe the processed content of the body in the response.
+
+<details>
+<summary>Click to see examples</summary>
+
+##### ✅
+
+Use the `Content-Type` header to indicate the media type of the body content.
+
+```bash
+Content-Type = "application/json"
+```
+
+##### ⛔️
+
+Avoid using the general default for all types.
+
+```bash
+Content-Type = "*/*"
+```
+
+##### Encoding
+
+##### ✅
+
+Use the `Content-Encoding` to indicate compression or encryption algorithms applied to the content.
+
+```bash
+Content-Encoding = "gzip, deflate, br"
+```
+
+##### ⛔️
+
+Avoid using the general default for all encoding types
+
+```bash
+Content-Encoding = "*"
+```
+
+</details>
 
 ## Status Codes
 
