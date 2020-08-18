@@ -618,14 +618,94 @@ __+10 sec__
 
 # Pagination
 
-## TODO
+The size and scope of data that is exposed via an API varies from application to application. Introducing pagination to an API seperates the data into smaller chunks allowing the API to deliver consistent and effecient response times aswell as protecting the service against overloading.
+
+There is therefore not a correct answer on how data should be paginated, but depends on the type of application that is being built.
+
+There are two well known pagination techniques in the industry today, each with their respective pros and cons.
+
+- **Offset Pagination**
+- **Cursor-based Pagination**
+
+## Offset Pagination
+
+This form of pagination is widely known and the most common. The response body should return two objects (**links** & **meta**) along with the returned data. The meta section contains all the relevant information giving the user the ability to get an overview of the pagination specific object. The links object contains the paginated links and can be used directly giving the user to jump to a specific page within the set.
 
 <details>
 <summary>Click to see examples</summary>
+<br/>
 
-### ✅
+The following keys **MUST** be used for pagination links:
 
-### ⛔️
+- **first**: the first page of data
+- **last**: the last page of data
+- **prev**: the previous page of data
+- **next**: the next page of data
+
+Keys **MUST** either be omitted or have a null value to indicate that a particular link is unavailable.
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "John"
+    },
+    {
+      "id": 2,
+      "name": "Doe"
+    }
+  ],
+  "links": {
+    "first": "https://example-test.like.st/api/test?page=1",
+    "last": "https://example-test.like.st/api/test?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://example-test.like.st/api/test",
+    "per_page": 20,
+    "to": 2,
+    "total": 2
+  }
+}
+```
+
+</details>
+
+## Cursor-based Pagination
+
+Cursor based pagination works by returning a pointer to a specific item in the dataset. The cursor is usually encoded containing the page position, that is the identifier of the first or last page element, the pagination direction and the applied query filters.
+
+This form of pagination is usually more effecient compared to offset-based pagination, especially when retrieving large datasets.
+
+<details>
+<summary>Click to see examples</summary>
+<br/>
+
+When using cursor-based pagination, the response body should consist of a cursor object where the following keys **MUST** be used for pagination links:
+
+- **self**: the current page of data
+- **first**: the first page of data
+- **last**: the last page of data
+- **prev**: the previous page of data
+- **next**: the next page of data
+
+```json
+{
+  "cursors": {
+    "self": "...",
+    "first": "...",
+    "prev": "...",
+    "next": "...",
+    "last": "..."
+  },
+  "data": [... ]
+}
+```
 
 </details>
 
