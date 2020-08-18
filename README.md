@@ -4,12 +4,14 @@ Table of contents created by [gh-md-toc](https://github.com/ekalinin/github-mark
 use the following command: `gh-md-toc README.md | grep -v g-emoji` to filter out lines with emoji
 -->
 
-<!--
----
+## <!--
+
 title: API Manifesto
 tags: [api,manifesto,best practice]
 link: https://github.com/monstar-lab-oss/API-manifesto
+
 ---
+
 -->
 
 <!--
@@ -29,47 +31,48 @@ New section template:
 -->
 
 # API Manifesto
+
 Documents how to write APIs
 
 ## Introduction
 
 This API Manifesto is a fast and easy overview of the most important elements for building a rock-solid API, which both the backend and frontend team enjoys working with.
-APIs are suppose to be very strict, it's a contract between Backend & Frontend. In the same time, there is no reason for APIs to be different depending on which language / framework was used in the Backend. 
+APIs are suppose to be very strict, it's a contract between Backend & Frontend. In the same time, there is no reason for APIs to be different depending on which language / framework was used in the Backend.
 
 This is not a full blown manifesto, check the [Inspiration section](#inspiration) for references to other manifestos with more details.
 
-Table of Contents
-=================
+# Table of Contents
 
-   * [API Manifesto](#api-manifesto)
-      * [Introduction](#introduction)
-   * [Table of Contents](#table-of-contents)
-   * [Requests](#requests)
-      * [URLs](#urls)
-         * [Prefix API endpoints](#prefix-api-endpoints)
-         * [API versioning](#api-versioning)
-      * [Request Headers](#request-headers)
-         * [Protected endpoints](#protected-endpoints)
-         * [Supporting localization](#supporting-localization)
-         * [Making debugging easier](#making-debugging-easier)
-   * [Responses](#responses)
-      * [Response Body](#response-body)
-         * [Object at the root level](#object-at-the-root-level)
-         * [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
-      * [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
-   * [Status Codes](#status-codes)
-   * [Auth](#auth)
-      * [TODO](#todo-1)
-   * [Error Handling](#error-handling)
-   * [Localization](#localization)
-      * [TODO](#todo-3)
-   * [Timeouts](#timeouts)
-      * [Client to Server](#client-to-server)
-      * [Server to Server](#client-to-server)
-   * [Pagination](#pagination)
-      * [TODO](#todo-5)
-   * [Inspiration](#inspiration)
-   
+- [API Manifesto](#api-manifesto)
+  - [Introduction](#introduction)
+- [Table of Contents](#table-of-contents)
+- [Requests](#requests)
+  - [URLs](#urls)
+    - [Prefix API endpoints](#prefix-api-endpoints)
+    - [API versioning](#api-versioning)
+  - [Request Headers](#request-headers)
+    - [Protected endpoints](#protected-endpoints)
+    - [Supporting localization](#supporting-localization)
+    - [Making debugging easier](#making-debugging-easier)
+- [Responses](#responses)
+  - [Response Body](#response-body)
+    - [Object at the root level](#object-at-the-root-level)
+    - [Return an empty collection when there are no results](#return-an-empty-collection-when-there-are-no-results)
+  - [Use null or unset keys that are not set](#use-null-or-unset-keys-that-are-not-set)
+- [Status Codes](#status-codes)
+- [Pagination](#pagination)
+- [Auth](#auth)
+  - [TODO](#todo-1)
+- [Error Handling](#error-handling)
+- [Localization](#localization)
+  - [TODO](#todo-3)
+- [Timeouts](#timeouts)
+  - [Client to Server](#client-to-server)
+  - [Server to Server](#client-to-server)
+- [Pagination](#pagination)
+  - [TODO](#todo-5)
+- [Inspiration](#inspiration)
+
 # Requests
 
 ## URLs
@@ -123,6 +126,7 @@ Accept = "application/vnd.example.v1+json"
 </details>
 
 ### REST resources
+
 After the API prefix and the version comes the part of the URL path that identifies the resource -- the piece of data you are interested in. Refer to a type of resource with a plural noun (eg. "users"). Directly following such a noun can be an identifier that points to a single instance.
 A resource can also be nested, usually if there some sort of parent/child relationship. This can be expressed by appending another plural noun to the URL.
 
@@ -245,7 +249,7 @@ UserToken = "QWxhZGRpbjpPcGVuU2VzYW1l"
 
 ### Supporting localization
 
-In order to support localization now and in the future, the `Accept-Language` should be used to indicate the client's language towards the API. 
+In order to support localization now and in the future, the `Accept-Language` should be used to indicate the client's language towards the API.
 
 <details>
 <summary>Click to see examples</summary>
@@ -290,9 +294,10 @@ Client-Meta-Information = iOS;staging;v1.2;iOS12;iPhone13
 </details>
 
 See:
- - [N-Meta-Vapor](https://github.com/nodes-vapor/n-meta)    
- - [N-Meta-PHP](https://github.com/monstar-lab-oss/n-meta-php)
- - [N-Meta-Laravel](https://github.com/monstar-lab-oss/n-meta-laravel)
+
+- [N-Meta-Vapor](https://github.com/nodes-vapor/n-meta)
+- [N-Meta-PHP](https://github.com/monstar-lab-oss/n-meta-php)
+- [N-Meta-Laravel](https://github.com/monstar-lab-oss/n-meta-laravel)
 
 # Responses
 
@@ -311,14 +316,14 @@ Returning a collection should be encapsulated in a key:
 
 ```json
 {
-    "data": [
-        {
-            "username": "..."
-        },
-        {
-            "username": "..."
-        }
-    ]
+  "data": [
+    {
+      "username": "..."
+    },
+    {
+      "username": "..."
+    }
+  ]
 }
 ```
 
@@ -326,9 +331,9 @@ Returning an object (e.g. a user) should also use the `data` key:
 
 ```json
 {
-    "data": {
-        "username": "..."
-    }
+  "data": {
+    "username": "..."
+  }
 }
 ```
 
@@ -336,9 +341,9 @@ Returning an error should use the `error` key:
 
 ```json
 {
-    "error": {
-        "description": "..."
-    }
+  "error": {
+    "description": "..."
+  }
 }
 ```
 
@@ -350,12 +355,12 @@ Avoid returning collections at the top level in the response:
 
 ```json
 [
-    {
-        "email": "..."
-    },
-    {
-        "email": "..."
-    }
+  {
+    "email": "..."
+  },
+  {
+    "email": "..."
+  }
 ]
 ```
 
@@ -363,8 +368,8 @@ Avoid returning data that are not encapsulated in a root key (`data` or `error`)
 
 ```json
 {
-    "error": true,
-    "description": "..."
+  "error": true,
+  "description": "..."
 }
 ```
 
@@ -383,7 +388,7 @@ Combine HTTP status code `200` with empty collections:
 
 ```json
 {
-    "data": []
+  "data": []
 }
 ```
 
@@ -406,10 +411,10 @@ Return a value as `null`:
 
 ```json
 {
-    "data": {
-        "email": null,
-        "name": "..."
-    }
+  "data": {
+    "email": null,
+    "name": "..."
+  }
 }
 ```
 
@@ -417,9 +422,9 @@ Unset a key without a value:
 
 ```json
 {
-    "data": {
-        "name": "..."
-    }
+  "data": {
+    "name": "..."
+  }
 }
 ```
 
@@ -429,11 +434,12 @@ Avoid including a key without a meaningful value:
 
 ```json
 {
-    "data": {
-        "name": ""
-    }
+  "data": {
+    "name": ""
+  }
 }
 ```
+
 </details>
 
 ## Status Codes
@@ -448,43 +454,138 @@ It's ok to use all available response codes, [See list](https://www.restapitutor
 Here is a list of the commonly used
 
 #### 2xx
- - `200` -> **OK**, used when on `GET` request with successful response 
- - `201` -> **Created**, used on `POST` creating a record in DB
- - `202` -> **Accepted**, used when request has been received, but processed async
- - `204` -> **No Content**, used when no response is send, e.g. on `DELETE`
+
+- `200` -> **OK**, used when on `GET` request with successful response
+- `201` -> **Created**, used on `POST` creating a record in DB
+- `202` -> **Accepted**, used when request has been received, but processed async
+- `204` -> **No Content**, used when no response is send, e.g. on `DELETE`
 
 #### 3xx
- - `301`-> **Moved Permanently**, used if the resource has been moved to another `URI`
- - `304` -> **Not Modified**, used if `If-Modified-Since` header is send and nothing has changed since
- 
+
+- `301`-> **Moved Permanently**, used if the resource has been moved to another `URI`
+- `304` -> **Not Modified**, used if `If-Modified-Since` header is send and nothing has changed since
+
 #### 4xx
 
- - `400` -> **Bad Request**, used when request cannot be processed, remember to give more info
- - `401` -> **Unauthorized**, used when authorization session is invalid or missing
- - `403` -> **Forbidden**, used when a route / entity was requested, but users access level does not permit it 
- - `404` -> **Not Found**, used when a route / entity was not found
- - `405` -> **Method Not Allowed**, used when a route was hit with wrong method
- - `409` -> **Conflict**, used when an entity conflicts with another entity, e.g. duplicate entities / IDs
- - `422` -> **Unprocessable Entity**, used when validation rules on `POST/PATCH/PUT` are not followed
- - `429` -> **Too Many Requests**, used when you want to rate limit your API
- 
-#### 5xx 
+- `400` -> **Bad Request**, used when request cannot be processed, remember to give more info
+- `401` -> **Unauthorized**, used when authorization session is invalid or missing
+- `403` -> **Forbidden**, used when a route / entity was requested, but users access level does not permit it
+- `404` -> **Not Found**, used when a route / entity was not found
+- `405` -> **Method Not Allowed**, used when a route was hit with wrong method
+- `409` -> **Conflict**, used when an entity conflicts with another entity, e.g. duplicate entities / IDs
+- `422` -> **Unprocessable Entity**, used when validation rules on `POST/PATCH/PUT` are not followed
+- `429` -> **Too Many Requests**, used when you want to rate limit your API
+
+#### 5xx
 
 - `500` -> **Internal Server Error**, used for undefined server errors, should store a record in an bug tracking tool like Bugsnag, Crashlytics, Rollbar, New relic
 - `501` -> **Not Implemented**, used when you want to indicate that the feature/functionality is not implemented (yet)
 - `502` -> **Bad Gateway**, used when an internal service was not reachable, e.g. in micro service architecture
-- `503` -> **Service Unavailable**, used when an external service was not reachable, e.g. twilio.com 
+- `503` -> **Service Unavailable**, used when an external service was not reachable, e.g. twilio.com
 - `504` -> **Gateway Timeout**, used to indicate that a request timed out (e.g. third party service took too long)
-   
+
 #### ⛔️
 
 Custom response codes, eg:
 
-- 490 
+- 490
 - 205
 - 512
 
 Use response body for the message instead
+
+</details>
+
+# Pagination
+
+The size and scope of data that is exposed via an API varies from application to application. Introducing pagination to an API seperates the data into smaller chunks allowing the API to deliver consistent and effecient response times aswell as protecting the service against overloading.
+
+There is therefore not a correct answer on how data should be paginated, but depends on the type of application that is being built.
+
+There are two well known pagination techniques in the industry today, each with their respective pros and cons.
+
+- **Offset Pagination**
+- **Cursor-based Pagination**
+
+## Offset Pagination
+
+This form of pagination is widely known and the most common. The response body should return two objects (**links** & **meta**) along with the returned data. The meta section contains all the relevant information giving the user the ability to get an overview of the pagination specific object. The links object contains the paginated links and can be used directly giving the user to jump to a specific page within the set.
+
+<details>
+<summary>Click to see examples</summary>
+<br/>
+
+The following keys **MUST** be used for pagination links:
+
+- **first**: the first page of data
+- **last**: the last page of data
+- **prev**: the previous page of data
+- **next**: the next page of data
+
+Keys **MUST** either be omitted or have a null value to indicate that a particular link is unavailable.
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "John"
+    },
+    {
+      "id": 2,
+      "name": "Doe"
+    }
+  ],
+  "links": {
+    "first": "https://example-test.like.st/api/test?page=1",
+    "last": "https://example-test.like.st/api/test?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://example-test.like.st/api/test",
+    "per_page": 20,
+    "to": 2,
+    "total": 2
+  }
+}
+```
+
+</details>
+
+## Cursor-based Pagination
+
+Cursor based pagination works by returning a pointer to a specific item in the dataset. The cursor is usually encoded containing the page position, that is the identifier of the first or last page element, the pagination direction and the applied query filters.
+
+This form of pagination is usually more effecient compared to offset-based pagination, especially when retrieving large datasets.
+
+<details>
+<summary>Click to see examples</summary>
+<br/>
+
+When using cursor-based pagination, the response body should consist of a cursor object where the following keys **MUST** be used for pagination links:
+
+- **self**: the current page of data
+- **first**: the first page of data
+- **last**: the last page of data
+- **prev**: the previous page of data
+- **next**: the next page of data
+
+```json
+{
+  "cursors": {
+    "self": "...",
+    "first": "...",
+    "prev": "...",
+    "next": "...",
+    "last": "..."
+  },
+  "data": [... ]
+}
+```
 
 </details>
 
@@ -508,11 +609,12 @@ Use response body for the message instead
 
 ### ✅
 
-The error object needs to have the following: 
- - Be consistent
- - Have all required info
- - Easily parsable
- - Should be possible to build a solid UI on top, guiding the user what happened, and how to move on
+The error object needs to have the following:
+
+- Be consistent
+- Have all required info
+- Easily parsable
+- Should be possible to build a solid UI on top, guiding the user what happened, and how to move on
 
 ```js
 {
@@ -571,7 +673,7 @@ The error object needs to have the following:
 
 Generally APIs should respond in less than 250ms on a wired connection. There needs to be a special reason for exceeding that. Further, it is important to understand that it will be harder and more expensive to scale the backend if response times are high.
 
-It's common that the webserver configuration will timeout the request after 30 or 60 seconds. 
+It's common that the webserver configuration will timeout the request after 30 or 60 seconds.
 
 ## Client to server
 
@@ -583,17 +685,17 @@ Therefore set timeouts to:
 
 ### ✅
 
-__Default:__ 15 sec
+**Default:** 15 sec
 
-__File upload APIs:__ Align with web server timeout (eg 30 or 60 sec)
+**File upload APIs:** Align with web server timeout (eg 30 or 60 sec)
 
 _If you are going to upload files above 5mb, consider having client upload directly to AWS S3, Dropbox etc. And sending path to server._
 
 ### ⛔️
 
-__+ 30sec__
+**+ 30sec**
 
-If API requests are taking more than 2 sec on a wired connection, consider changing the API design. 
+If API requests are taking more than 2 sec on a wired connection, consider changing the API design.
 Eg: Put the operation in a queue system like SQS, Redis, Beanstalkd and inform the client about operation is complete by push notification, web socket, email etc.
 
 </details>
@@ -601,6 +703,7 @@ Eg: Put the operation in a queue system like SQS, Redis, Beanstalkd and inform t
 ## Server to server
 
 Server to service APIs should always be very stable due to connection being wired and stable. Therefore we can be much more aggressive about timeouts.
+
 <details>
 <summary>Click to see examples</summary>
 
@@ -612,7 +715,7 @@ Implementing a retry system is strongly advised. If the server is not responding
 
 ### ⛔️
 
-__+10 sec__
+**+10 sec**
 
 </details>
 
