@@ -565,7 +565,7 @@ Avoid using other standards than ISO 639-1 for specifying the preferred language
 
 Language tags are by definition case-insensitive, but conventionally we will use upper case letters for the language-range subtag.
 
-Make requiremens with your project team, 
+Discuss requiremens with your project team:
  - Is localization necessary?
  - What languages shold be supported?
  - Should you use a default/fallback language?
