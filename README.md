@@ -62,7 +62,8 @@ Table of Contents
       * [TODO](#todo-1)
    * [Error Handling](#error-handling)
    * [Localization](#localization)
-      * [TODO](#todo-3)
+      * [Unsupprted locales](#unsupported-locales)
+      * [Localized Response](#localized-response)
    * [Timeouts](#timeouts)
       * [Client to Server](#client-to-server)
       * [Server to Server](#client-to-server)
@@ -555,17 +556,40 @@ The error object needs to have the following:
 </details>
 
 # Localization
+Localization refers to the ability of serving localized content based on a language requirement in the request.
 
-## TODO
+Not all of our productions have this requirement initially, however it might arise at a later stage and in order avoid any misunderstandings it is a good idea to be prepared for such changes.
+
+It is therefore recommended to use the [`Accept-Language`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language) headers on your apis. 
 
 <details>
-<summary>Click to see examples</summary>
+    <summary>Click to see example request</summary>
 
-### ✅
-
-### ⛔️
+    curl 'http://localhost:3000/' --header 'Accept: application/json' --header 'Accept-Language: en_US'
 
 </details>
+
+For simplicity we are restricting the value of the header (language tag) to a simple locale string defined as:
+
+```
+a primary language subtag that identifies a broad family of related languages (e.g., "en" = English)
+followed by a subtag, refining or narrowing that language's range (e.g., "en-CA" = the variety of English as communicated in Canada)
+```
+
+Language tags are by definition case-insensitive, but conventionally we will use upper case letters for the language-range subtag.
+
+Make requiremens with your project team, 
+ - Is localization necessary?
+ - What languages shold be supported?
+ - Should you use a default/fallback language?
+
+## Unsupported locales
+
+When a user agent requests content using an unsupported language locale your application should provide the content, using a fallback locale. The definition of the `Accept-Language` header states that returning error `406 Not Acceptable` is allowed, but providing fallback content, prevents the user agent from dealing with the error and provides a better overall user experience in the end.
+
+## Localized response
+
+Currently requesting a specific locale has no effect on content in the response, besides providing the content in the preferred language if available.
 
 # Timeouts
 
