@@ -530,6 +530,11 @@ Not all of our productions have this requirement initially, however it might ari
 
 It is therefore recommended to use the [`Accept-Language`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language) headers on your apis. 
 
+For simplicity we are restricting the value of the header (language tag) to a simple locale string defined as:
+
+ - a primary language subtag that identifies a broad family of related languages (e.g., "en" = English). Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
+ - followed by a subtag, refining or narrowing that language's range to a specific region (e.g., "en-CA" = the variety of English as communicated in Canada) Use [ISO 3166 Alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
+
 <details>
     <summary>Click to see examples</summary>
 
@@ -557,11 +562,6 @@ Avoid using other standards than ISO 639-1 for specifying the preferred language
 ```
 
 </details>
-
-For simplicity we are restricting the value of the header (language tag) to a simple locale string defined as:
-
- - a primary language subtag that identifies a broad family of related languages (e.g., "en" = English). Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
- - followed by a subtag, refining or narrowing that language's range to a specific region (e.g., "en-CA" = the variety of English as communicated in Canada) Use [ISO 3166 Alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
 Language tags are by definition case-insensitive, but conventionally we will use upper case letters for the language-range subtag.
 
