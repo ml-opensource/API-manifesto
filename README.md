@@ -526,13 +526,14 @@ The error object needs to have the following:
 # Localization
 Localization refers to the ability of serving localized content based on a language requirement in the request.
 
-Not all of our productions have this requirement initially, however it might arise at a later stage and in order avoid any misunderstandings it is a good idea to be prepared for such changes.
+Not all of your productions will have this requirement initially, however it might arise at a later stage and in order avoid any misunderstandings it is a good idea to be prepared for such changes.
 
-It is therefore recommended to use the [`Accept-Language`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language) headers on your apis. 
+It is therefore recommended to use the [`Accept-Language`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language) header on your apis. 
 
 For simplicity we are restricting the value of the header (language tag) to a simple locale string defined as:
 
  - a primary language subtag that identifies a broad family of related languages (e.g., "en" = English). Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
+ - followed by a hyphen `-`
  - followed by a subtag, refining or narrowing that language's range to a specific region (e.g., "en-CA" = the variety of English as communicated in Canada) Use [ISO 3166 Alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
 <details>
