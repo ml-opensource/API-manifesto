@@ -496,47 +496,52 @@ Authentication is one of the most essential and important parts of the API. Auth
 - **Never** pass sensitive information as query string parameters. I can be logged by a web server, proxy or load balancer and make a risk of data leak.
 - The **only time** you should ever return an user’s API token is when a user either is **successfully created** or **successfully authenticated**.
 
-We recommend using [JWT](https://www.rfc-editor.org/rfc/rfc7519) Access Token + Refresh Token
+When implementation of authentication is should be implemented by us, we highly encourage to follow these recommendations:
+
+## Authentication
+
+- Use Bearer authentication (described in [RFC6750](https://www.rfc-editor.org/rfc/rfc6750)).
+ - Use JWT (described in [RFC7591](https://www.rfc-editor.org/rfc/rfc7519)) as a Bearer token.
 
 ## Procedures
----
+
 ###  Registration
 1. Client makes a request `POST /api/v1/users/register`
-```json
-{
-    "email": "john.doe@example.com",
-    "password": "Password123!",
-    "passwordConfirmation": "Password123!",
-    // additional fields
-}
-```
+    ```json
+    {
+        "email": "john.doe@example.com",
+        "password": "Password123!",
+        "passwordConfirmation": "Password123!",
+        // additional fields
+    }
+    ```
 2. Server sends an email with confirmation link containing confirmation token and responses with `204 No Content`
 
 3. Client makes a request `POST /api/v1/users/register/confirm`
 
-```json
-{
-    "token": "<confirmaiton_token>"
-}
-```
+    ```json
+    {
+        "token": "<confirmaiton_token>"
+    }
+    ```
 
 4. Server responses with `200 OK` and user info and tokens:
 
-```json
-{
-    "data": {
-        "user": {
-            "email": "john.doe@example.com",
-            // additional fields
-        },
-        "tokens": {
-            "accessToken": "<access_token>",
-            "refreshToken": "<refresh_token>",
-            "expiresIn": 300  
+    ```json
+    {
+        "data": {
+            "user": {
+                "email": "john.doe@example.com",
+                // additional fields
+            },
+            "tokens": {
+                "accessToken": "<access_token>",
+                "refreshToken": "<refresh_token>",
+                "expiresIn": 300  
+            }
         }
     }
-}
-```
+    ```
 ---
 ### Login
 
@@ -550,61 +555,58 @@ We recommend using [JWT](https://www.rfc-editor.org/rfc/rfc7519) Access Token + 
 
 2. Server responses with `200 OK` and user info and tokens:
 
-```json
-{
-    "data": {
-        "user": {
-            "email": "john.doe@example.com",
-            // additional fields
-        },
-        "tokens": {
-            "accessToken": "<access_token>",
-            "refreshToken": "<refresh_token>",
-            "expiresIn": 300  
+    ```json
+    {
+        "data": {
+            "user": {
+                "email": "john.doe@example.com",
+                // additional fields
+            },
+            "tokens": {
+                "accessToken": "<access_token>",
+                "refreshToken": "<refresh_token>",
+                "expiresIn": 300  
+            }
         }
     }
-}
-```
----
-### Logout [WIP]
-TBD
+    ```
 ___
 
 ### Change password
 1. Client makes a request `PATCH /api/v1/users/changePassword`
-```json
-{
-    "currentPassword": "Password123!",
-    "newPassword": "Qwerty321?",
-    "newPasswordConfirmation": "Qwerty321?"
-}
-```
+    ```json
+    {
+        "currentPassword": "Password123!",
+        "newPassword": "Qwerty321?",
+        "newPasswordConfirmation": "Qwerty321?"
+    }
+    ```
 
 2. Server responses with `204 NoContent`
 ---
 ### Reset password
 1. Client makes a request `POST /api/v1/users/requestResetPassword`
-```json
-{
-    "email": "john.doe@example.com"
-}
-```
+    ```json
+    {
+        "email": "john.doe@example.com"
+    }
+    ```
 2. Server sends an email with a link containing reset password token and responses with `204 NoContent`.
 
 3. Client makes a request `POST /api/v1/users/resetPassword`
-```json
-{
-    "token": "<reset_password_token>",
-    "newPassword": "Qwerty321?",
-    "newPasswordConfirmation": "Qwerty321?"
-}
-```
+    ```json
+    {
+        "token": "<reset_password_token>",
+        "newPassword": "Qwerty321?",
+        "newPasswordConfirmation": "Qwerty321?"
+    }
+    ```
 4. Server responses with `204 NoContent`
 ___
 ## Rate limiting
-In order to protect against brute-force attacks rate limiting should be applied to `login`, `register` and `resetPassword` endpoints.
+In order to protect API against brute-force attacks rate limiting should be applied to `login`, `register` and `resetPassword` endpoints.
 
-## 3rd party authentication and SSO [WIP]
+## 3rd party authentication and SSO
 For implementing authentication with 3rd party services (e.g. Facebook, Github etc.) or SSO we recommend to use OAuth2.0 or/and OIDC. Client may demand using their IdP such as KeyCloak or Azure Active Directory, but as soon as all these providers implement standard protocols (OAuth2.0, OIDC), the choice of a specific provider does not make any significant changes in implementation of API.
 
 ## TODO
