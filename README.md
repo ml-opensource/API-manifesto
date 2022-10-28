@@ -618,16 +618,10 @@ __+10 sec__
 
 # Pagination
 
-## TODO
+Pagination may be complex, but for most of the cases we suggest keep it simple and stick to a common pattern with two query parameters `../items?page=1&limit=10`.
 
-<details>
-<summary>Click to see examples</summary>
+It provides just enough functionality to build classic **page-based** navigation as well as **endless scroll-based** approach.
 
-### ✅
-
-### ⛔️
-
-</details>
 
 # Inspiration
 
