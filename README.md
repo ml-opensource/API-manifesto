@@ -498,116 +498,26 @@ Authentication is one of the most essential and important parts of the API. Auth
 
 When implementation of authentication is should be implemented by us, we highly encourage to follow these recommendations:
 
-## Authentication
-
-- Use Bearer authentication (described in [RFC6750](https://www.rfc-editor.org/rfc/rfc6750)).
+## User authentication
+- Use [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) HTTP header.
+- Use Bearer scheme (described in [RFC6750](https://www.rfc-editor.org/rfc/rfc6750)).
  - Use JWT (described in [RFC7591](https://www.rfc-editor.org/rfc/rfc7519)) as a Bearer token.
+ - Avoid implementing authorization flow by yourself, use well-known libraries and frameworks instead.
 
-## Procedures
-
-###  Registration
-1. Client makes a request `POST /api/v1/users/register`
-    ```json
-    {
-        "email": "john.doe@example.com",
-        "password": "Password123!",
-        "passwordConfirmation": "Password123!",
-        // additional fields
-    }
-    ```
-2. Server sends an email with confirmation link containing confirmation token and responses with `204 No Content`
-
-3. Client makes a request `POST /api/v1/users/register/confirm`
-
-    ```json
-    {
-        "token": "<confirmaiton_token>"
-    }
-    ```
-
-4. Server responses with `200 OK` and user info and tokens:
-
-    ```json
-    {
-        "data": {
-            "user": {
-                "email": "john.doe@example.com",
-                // additional fields
-            },
-            "tokens": {
-                "accessToken": "<access_token>",
-                "refreshToken": "<refresh_token>",
-                "expiresIn": 300  
-            }
-        }
-    }
-    ```
----
-### Login
-
-1. Client makes a request `POST /api/users/v1/login`
+## Token payload
+Token payload should contain following data:
 ```json
 {
-    "email": "john.doe@example.com",
-    "password": "Password123!"
+    "access_token": "<access_token>",
+    "refresh_token": "<refresh_token>",
+    "expires_in": <seconds>
 }
 ```
 
-2. Server responses with `200 OK` and user info and tokens:
-
-    ```json
-    {
-        "data": {
-            "user": {
-                "email": "john.doe@example.com",
-                // additional fields
-            },
-            "tokens": {
-                "accessToken": "<access_token>",
-                "refreshToken": "<refresh_token>",
-                "expiresIn": 300  
-            }
-        }
-    }
-    ```
-___
-
-### Change password
-1. Client makes a request `PATCH /api/v1/users/changePassword`
-    ```json
-    {
-        "currentPassword": "Password123!",
-        "newPassword": "Qwerty321?",
-        "newPasswordConfirmation": "Qwerty321?"
-    }
-    ```
-
-2. Server responses with `204 NoContent`
----
-### Reset password
-1. Client makes a request `POST /api/v1/users/requestResetPassword`
-    ```json
-    {
-        "email": "john.doe@example.com"
-    }
-    ```
-2. Server sends an email with a link containing reset password token and responses with `204 NoContent`.
-
-3. Client makes a request `POST /api/v1/users/resetPassword`
-    ```json
-    {
-        "token": "<reset_password_token>",
-        "newPassword": "Qwerty321?",
-        "newPasswordConfirmation": "Qwerty321?"
-    }
-    ```
-4. Server responses with `204 NoContent`
-___
-## Rate limiting
-In order to protect API against brute-force attacks rate limiting should be applied to `login`, `register` and `resetPassword` endpoints.
-
 ## 3rd party authentication and SSO
 For implementing authentication with 3rd party services (e.g. Facebook, Github etc.) or SSO we recommend to use OAuth2.0 or/and OIDC. Client may demand using their IdP such as KeyCloak or Azure Active Directory, but as soon as all these providers implement standard protocols (OAuth2.0, OIDC), the choice of a specific provider does not make any significant changes in implementation of API.
+
+
 
 ## TODO
 
