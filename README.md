@@ -493,10 +493,13 @@ Use response body for the message instead
 Authentication is one of the most essential and important parts of the API. Authentication implementations is highly dependent on the requirements and features of each specific project, so we will not cover all all possible options of implementation. However we will specify a bunch of common requirements that apply to any authentication method:
 - **Always** use TLS-encrypted connection, when trying to authenticate an user.
 - **Always** store passwords/secrets hashed/encrypted. **Never** store passwords/secrets as a plain text. **Never** implement your own encryption algorithm, use time-tested solutions available for your stack.
-- **Never** pass sensitive information as query string parameters. I can be logged by a web server, proxy or load balancer and make a risk of data leak.
-- The **only time** you should ever return an user’s API token is when a user either is **successfully created** or **successfully authenticated**.
+- **Never** pass sensitive information as query string parameters. It can be logged by a web server, proxy or load balancer and make a risk of data leak.
+- You should return an user’s API token **only** in these cases:
+   - user is **successfully created**
+   - user is **successfully authenticated**
+   - tokens are **successfully refreshed**
 
-When implementation of authentication is should be implemented by us, we highly encourage to follow these recommendations:
+When authentication is implemented by us, we highly encourage following these recommendations:
 
 ## User authentication
 - Use [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) HTTP header.
