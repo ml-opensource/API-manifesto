@@ -50,7 +50,6 @@ Table of Contents
          * [API versioning](#api-versioning)
       * [Request Headers](#request-headers)
          * [Protected endpoints](#protected-endpoints)
-         * [Supporting localization](#supporting-localization)
          * [Making debugging easier](#making-debugging-easier)
    * [Responses](#responses)
       * [Response Body](#response-body)
@@ -62,7 +61,8 @@ Table of Contents
       * [TODO](#todo-1)
    * [Error Handling](#error-handling)
    * [Localization](#localization)
-      * [TODO](#todo-3)
+      * [Unsupprted locales](#unsupported-locales)
+      * [Localized Response](#localized-response)
    * [Timeouts](#timeouts)
       * [Client to Server](#client-to-server)
       * [Server to Server](#client-to-server)
@@ -239,37 +239,6 @@ Avoid using custom headers for authorization:
 
 ```bash
 UserToken = "QWxhZGRpbjpPcGVuU2VzYW1l"
-```
-
-</details>
-
-### Supporting localization
-
-In order to support localization now and in the future, the `Accept-Language` should be used to indicate the client's language towards the API. 
-
-<details>
-<summary>Click to see examples</summary>
-
-#### ✅
-
-Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
-
-```bash
-Accept-Language = "da"
-```
-
-Use a prioritized list of languages to influence the fallback language:
-
-```bash
-Accept-Language = "da, en"
-```
-
-#### ⛔️
-
-Avoid using other standards than ISO 639-1 for specifying the preferred language:
-
-```bash
-Accept-Language = "danish"
 ```
 
 </details>
@@ -587,17 +556,60 @@ The error object needs to have the following:
 </details>
 
 # Localization
+Localization refers to the ability of serving localized content based on a language requirement in the request.
 
-## TODO
+Not all of your productions will have this requirement initially, however it might arise at a later stage and in order avoid any misunderstandings it is a good idea to be prepared for such changes.
+
+It is therefore recommended to use the [`Accept-Language`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language) header on your apis. 
+
+For simplicity we are restricting the value of the header (language tag) to a simple locale string defined as:
+
+ - a primary language subtag that identifies a broad family of related languages (e.g., "en" = English). Use [ISO 639-1](http://www.loc.gov/standards/iso639-2/php/code_list.php) codes to indicate the preferred language of the response.
+ - followed by a hyphen `-`
+ - followed by a subtag, refining or narrowing that language's range to a specific region (e.g., "en-CA" = the variety of English as communicated in Canada) Use [ISO 3166 Alpha 2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
 
 <details>
-<summary>Click to see examples</summary>
+    <summary>Click to see examples</summary>
 
-### ✅
+    curl 'http://localhost:3000/' --header 'Accept: application/json' --header 'Accept-Language: en-US'
 
-### ⛔️
+
+#### ✅
+
+```
+'Accept-Language: da-DK'
+```
+
+Use a prioritized list of languages to influence the fallback language:
+
+```
+'Accept-Language: da-DK,en-US'
+```
+
+#### ⛔️
+
+Avoid using other standards than ISO 639-1 for specifying the preferred language:
+
+```
+'Accept-Language: danish'
+```
 
 </details>
+
+Language tags are by definition case-insensitive, but conventionally we will use upper case letters for the language-range subtag.
+
+Discuss requiremens with your project team:
+ - Is localization necessary?
+ - What languages shold be supported?
+ - Should you use a default/fallback language?
+
+## Unsupported locales
+
+When a user agent requests content using an unsupported language locale your application should provide the content, using a fallback locale. The definition of the `Accept-Language` header states that returning error `406 Not Acceptable` is allowed, but providing fallback content, prevents the user agent from dealing with the error and provides a better overall user experience in the end.
+
+## Localized response
+
+Currently requesting a specific locale has no effect on content in the response, besides providing the content in the preferred language if available.
 
 # Timeouts
 
