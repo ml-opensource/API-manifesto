@@ -490,6 +490,38 @@ Use response body for the message instead
 
 # Auth
 
+Authentication is one of the most essential and important parts of the API. Authentication implementations is highly dependent on the requirements and features of each specific project, so we will not cover all all possible options of implementation. However we will specify a bunch of common requirements that apply to any authentication method:
+- **Always** use TLS-encrypted connection, when trying to authenticate an user.
+- **Always** store passwords/secrets hashed/encrypted. **Never** store passwords/secrets as a plain text. **Never** implement your own encryption algorithm, use time-tested solutions available for your stack.
+- **Never** pass sensitive information as query string parameters. It can be logged by a web server, proxy or load balancer and make a risk of data leak.
+- You should return an user’s API token **only** in these cases:
+   - user is **successfully created**
+   - user is **successfully authenticated**
+   - tokens are **successfully refreshed**
+
+When authentication is implemented by us, we highly encourage following these recommendations:
+
+## User authentication
+- Use [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) HTTP header.
+- Use Bearer scheme (described in [RFC6750](https://www.rfc-editor.org/rfc/rfc6750)).
+ - Use JWT (described in [RFC7591](https://www.rfc-editor.org/rfc/rfc7519)) as a Bearer token.
+ - Avoid implementing authorization flow by yourself, use well-known libraries and frameworks instead.
+
+## Token payload
+Token payload should contain following data:
+```json
+{
+    "access_token": "<access_token>",
+    "refresh_token": "<refresh_token>",
+    "expires_in": <seconds>
+}
+```
+
+## 3rd party authentication and SSO
+For implementing authentication with 3rd party services (e.g. Facebook, Github etc.) or SSO we recommend to use OAuth2.0 or/and OIDC. Client may demand using their IdP such as KeyCloak or Azure Active Directory, but as soon as all these providers implement standard protocols (OAuth2.0, OIDC), the choice of a specific provider does not make any significant changes in implementation of API.
+
+
+
 ## TODO
 
 <details>
